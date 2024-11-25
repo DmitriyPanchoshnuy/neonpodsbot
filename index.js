@@ -8,13 +8,13 @@ const bot = new TelegramBot(token, { polling: true });
 
 bot.onText(/\/start/, async (msg) => {
   const user = (await getClientsWhere("user_id", msg.from.id))[0]
-  if (user && user.user_id === msg.from.id && user.is_verified ) {
+  if (user && user.user_id === msg.from.id && user.is_verified) {
     if (user.status === "user") {
       try {
         await bot.sendMessage(msg.chat.id, "Доброго дня!", {
           reply_markup: {
             keyboard: [
-              [{text: "Зробити замовлення", web_app:{url:weburl}}],
+              [{ text: "Зробити замовлення", web_app: { url: weburl } }],
             ],
             resize_keyboard: true,
             one_time_keyboard: true,
@@ -28,8 +28,8 @@ bot.onText(/\/start/, async (msg) => {
         await bot.sendMessage(msg.chat.id, "Доброго дня!", {
           reply_markup: {
             keyboard: [
-              [{text: "Зробити замовлення", web_app:{url:weburl}}],
-              [{text: "Список заявок", web_app:{url:weburl}}]
+              [{ text: "Зробити замовлення", web_app: { url: weburl } }],
+              [{ text: "Список заявок", web_app: { url: weburl } }]
             ],
             resize_keyboard: true,
             one_time_keyboard: true,
