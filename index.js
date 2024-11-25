@@ -4,8 +4,6 @@ let token = "8171642578:AAHPySOLauJPR4ldU4rTYXCj7CwH1ULU-qk";
 const weburl = "https://joyful-pie-cde201.netlify.app/"
 const bot = new TelegramBot(token, { polling: true });
 
-
-
 bot.onText(/\/start/, async (msg) => {
   const user = (await getClientsWhere("user_id", msg.from.id))[0]
   if (user && user.user_id === msg.from.id && user.is_verified) {
@@ -23,6 +21,8 @@ bot.onText(/\/start/, async (msg) => {
       } catch (e) {
         console.log(`ERROR: ${e}`)
       }
+    } else if (user.status === 'deliveryman') {
+      
     } else if (user.status === "admin") {
       try {
         await bot.sendMessage(msg.chat.id, "Доброго дня!", {
@@ -41,6 +41,8 @@ bot.onText(/\/start/, async (msg) => {
     }
 
   } else {
+    // Создаем клиента если его нету
+
     if (!user) {
       const error = await addClients(msg.from.id)
     }
